@@ -1,4 +1,3 @@
-#!/bin/env python
 import eyed3
 import urllib
 import shutil
@@ -86,9 +85,6 @@ def dataEntryLoop(audiofile):
 
     if anwser == "y":
         try:
-#            audiofile.tag.title = str(title, "utf-8")
-#            audiofile.tag.artist = str(artist, "utf-8")
-#            audiofile.tag.album = str(album, "utf-8")
             audiofile.tag.title = title
             audiofile.tag.artist = artist
             audiofile.tag.album = album
