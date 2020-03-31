@@ -1,5 +1,5 @@
 import eyed3
-import urllib
+import urllib.request
 import shutil
 import os
 import re
@@ -28,20 +28,23 @@ def addAlbumArt(audiofile):
     if albumart_url == "":
         return
 
-    albumart_url = "album_art/" + albumart_url
     try:
         imagedata = None
         try:
-            response = urllib2.urlopen(albumart_url)
+            response = urllib.request.urlopen(albumart_url)
             imagedata = response.read()
-        except:
+        except Exception as e:
+            print(albumart_url + " not url")
+            print(str(e))
+            albumart_url = "album_art/" + albumart_url
             imagedata = open(albumart_url, 'rb').read()
 
         audiofile.tag.images.set(
             3, imagedata, "image/jpeg", u"you can put a description here")
         audiofile.tag.save()
-    except:
+    except Exception as e:
         print('Unable to add album art for ' + albumart_url)
+        print(str(e))
         addAlbumArt(audiofile)
 
 
